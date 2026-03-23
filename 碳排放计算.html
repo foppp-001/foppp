@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>家庭用水碳排放量计算</title>
+</head>
+<body>
+<h2>家庭用水碳排放量计算（全9板块）</h2>
+
+<h3>基础信息</h3>
+<p>所在省份：
+  <select id="province">
+    <option value="0.5439">河北</option>
+    <option value="0.5322">山西</option>
+    <option value="0.528075">天津</option>
+    <option value="0.513675">内蒙古</option>
+    <option value="0.50865">安徽</option>
+    <option value="0.49185">陕西</option>
+    <option value="0.481725">宁夏</option>
+    <option value="0.48075">山东</option>
+    <option value="0.467325">新疆</option>
+    <option value="0.45435">河南</option>
+    <option value="0.44835">江苏</option>
+    <option value="0.438675">上海</option>
+    <option value="0.4314">江西</option>
+    <option value="0.42195">辽宁</option>
+    <option value="0.4185">北京</option>
+    <option value="0.4026">黑龙江</option>
+    <option value="0.392025">重庆</option>
+    <option value="0.386475">浙江</option>
+    <option value="0.374175">贵州</option>
+    <option value="0.3699">吉林</option>
+    <option value="0.3675">湖南</option>
+    <option value="0.3579">甘肃</option>
+    <option value="0.330225">广东</option>
+    <option value="0.3273">湖北</option>
+    <option value="0.3138">海南</option>
+    <option value="0.3069">福建</option>
+    <option value="0.3033">广西</option>
+    <option value="0.117525">青海</option>
+    <option value="0.1053">四川</option>
+    <option value="0.080475">西藏</option>
+    <option value="0.080475">云南</option>
+  </select>
+</p>
+<p>集中供暖已启用：<select id="heat"><option>否</option><option>是</option></select></p>
+<p>空气能热泵：<select id="pump"><option>否</option><option>是</option></select></p>
+<p>本周平均温度(℃)：<input type="number" id="x" value="15"></p>
+
+<h3>板块1 饮用水</h3>
+<p>每日饮水量(L)：<input type="number" id="y" value="20"></p>
+<p>白开水占比：<select id="b1">
+<option value="0">0%</option><option value="0.25">25%</option><option value="0.5">50%</option>
+<option value="0.75">75%</option><option value="1">100%</option>
+</select></p>
+<p>瓶装水占比：<select id="b2">
+<option value="0">0%</option><option value="0.25">25%</option><option value="0.5">50%</option>
+<option value="0.75">75%</option><option value="1">100%</option>
+</select></p>
+
+<h3>板块2 洗澡</h3>
+<p>本周洗澡次数：<input type="number" id="bathTimes" value="5"></p>
+<p>每次放水时间(min)：<input type="number" id="bathMin" value="10"></p>
+<p>洗澡温度：<input type="number" id="bathTemp" value="40"></p>
+<p>加热方式：<select id="bathType">
+<option>冷水澡</option>
+<option>燃料燃烧</option>
+<option>电力加热</option>
+<option>集中供热</option>
+<option>太阳能</option>
+<option>空气能热泵</option>
+</select></p>
+
+<h3>板块3 洗漱</h3>
+<p>每日次数：<input type="number" id="washTimes" value="5"></p>
+<p>每次时间(min)：<input type="number" id="washMin" value="2"></p>
+<p>是否用热水：<select id="washHot"><option>否</option><option>是</option></select></p>
+
+<h3>板块4 做饭</h3>
+<p>在家烹饪占比：<input type="number" id="cookRate" value="0.7"></p>
+<p>烹饪程度(0.3/0.5/0.7)：<input type="number" id="cookLevel" value="0.5"></p>
+
+<h3>板块5 餐厨</h3>
+<p>备菜放水时间(min)：<input type="number" id="prepTime" value="5"></p>
+<p>洗碗时间(min)：<input type="number" id="washDishTime" value="10"></p>
+<p>洗碗是否用热水：<select id="dishHot"><option>否</option><option>是</option></select></p>
+<p>是否用洗碗机：<select id="dishWasher"><option>否</option><option>是</option></select></p>
+
+<h3>板块6 如厕</h3>
+<p>每日平均次数：<input type="number" id="toiletTimes" value="4"></p>
+<p>马桶类型：<select id="toiletType">
+<option>老式单档</option><option>双档</option><option>新国标节水</option>
+</select></p>
+
+<h3>板块7 洗衣</h3>
+<p>每日洗衣次数：<input type="number" id="washClothTimes" value="1"></p>
+<p>洗衣方式：<select id="washType">
+<option>滚筒</option><option>波轮</option><option>手洗</option>
+</select></p>
+
+<h3>板块8 游泳池</h3>
+<p>是否换水：<select id="poolChange"><option>否</option><option>是</option></select></p>
+<p>泳池总水量(L)：<input type="number" id="poolVol" value="0"></p>
+
+<h3>板块9 其他（浇花/养鱼）</h3>
+<p>每日用水量(L)：<input type="number" id="otherUse" value="2"></p>
+
+<button onclick="calcAll()">点击计算全部</button>
+
+<h2>计算结果</h2>
+
+<h1 style="color:red">最终总碳排放量：<span id="total"></span></h1>
+
+<script>
+function calcAll() {
+  // 基础：自动获取省份对应的碳排放因子
+  let factor = Number(document.getElementById("province").value);
+  let heating = document.getElementById("heat").value == "是";
+  let pump = document.getElementById("pump").value == "是";
+  let x = Number(document.getElementById("x").value);
+
+  // 各类水单位碳排放系数
+  const coefA = 0.000;
+  const coefB = 0.293;
+  const coefC = 0.678;
+  const coefD = 0.460;
+  const coefE = 0.106;
+  const coefF = 0.226;
+
+  // 板块1
+  let y = Number(document.getElementById("y").value);
+  let b1 = Number(document.getElementById("b1").value);
+  let b2 = Number(document.getElementById("b2").value);
+  let C1 = (100 - x) * y / 1000 * b1;
+  let A1 = y / 1000 * (1 - b1) * ((1 - b2) + 4 * b2);
+
+  // 板块2
+  let bt = Number(document.getElementById("bathTimes").value);
+  let bm = Number(document.getElementById("bathMin").value);
+  let btmp = Number(document.getElementById("bathTemp").value);
+  let btype = document.getElementById("bathType").value;
+  let water2 = bt * bm * 8 / 1000;
+  let A2 = 0, B2 = 0, C2 = 0, D2 = 0, E2 = 0, F2 = 0;
+  if (btype == "冷水澡") A2 = water2;
+  if (btype == "燃料燃烧") B2 = water2 * (btmp - x) / 7;
+  if (btype == "电力加热") C2 = water2 * (btmp - x) / 7;
+  if (btype == "集中供热") D2 = water2 * (btmp - x) / 7;
+  if (btype == "太阳能") E2 = water2 * (btmp - x) / 7;
+  if (btype == "空气能热泵") F2 = water2 * (btmp - x) / 7;
+
+  // 板块3
+  let wt = Number(document.getElementById("washTimes").value);
+  let wm = Number(document.getElementById("washMin").value);
+  let wHot = document.getElementById("washHot").value == "是";
+  let A3 = 0, C3 = 0;
+  if (!wHot) A3 = wt * wm * 6 / 1000;
+  else {
+    let k = 0.71;
+    if (heating || pump) k = 1;
+    C3 = wt * wm * 6 / 1000 * (37 - x) * k;
+  }
+
+  // 板块4
+  let cookR = Number(document.getElementById("cookRate").value);
+  let cookL = Number(document.getElementById("cookLevel").value);
+  let cook = 3 * cookR * cookL;
+
+  // 板块5
+  let prep = Number(document.getElementById("prepTime").value);
+  let dishT = Number(document.getElementById("washDishTime").value);
+  let dishH = document.getElementById("dishHot").value == "是";
+  let dishW = document.getElementById("dishWasher").value == "是";
+  let A5 = 3 * cookR * prep * 6 / 1000;
+  let A5d = 0, C5d = 0;
+  if (dishW) {
+    C5d = 3 * cookR * 0.664;
+  } else if (!dishH) {
+    A5d = 3 * cookR * dishT * 6 / 1000;
+  } else {
+    let k = 0.71;
+    if (heating || pump) k = 1;
+    C5d = 3 * cookR * dishT * 6 / 1000 * (37 - x) * k;
+  }
+
+  // 板块6
+  let toiletT = Number(document.getElementById("toiletTimes").value);
+  let toiletTpe = document.getElementById("toiletType").value;
+  let A6 = 0;
+  if (toiletTpe == "老式单档") A6 = toiletT * 7 / 1000;
+  if (toiletTpe == "双档") A6 = (toiletT / 5 * 6 + toiletT / 5 * 4 * 3) / 1000;
+  if (toiletTpe == "新国标节水") A6 = (toiletT / 5 * 4 + toiletT / 5 * 4 * 2) / 1000;
+
+  // 板块7
+  let wct = Number(document.getElementById("washClothTimes").value);
+  let wctp = document.getElementById("washType").value;
+  let A7 = 0;
+  if (wctp == "滚筒") A7 = wct * 50 / 1000;
+  if (wctp == "波轮") A7 = wct * 120 / 1000;
+  if (wctp == "手洗") A7 = wct * 25 / 1000;
+
+  // 板块8
+  let poolChg = document.getElementById("poolChange").value == "是";
+  let poolV = Number(document.getElementById("poolVol").value);
+  let A8 = poolV * 0.02;
+  if (poolChg) A8 += poolV;
+
+  // 板块9
+  let A9 = Number(document.getElementById("otherUse").value);
+
+  // 汇总各类水
+  let A = A1 + A2 + A3 + A5 + A5d + A6 + A7 + A8 + A9;
+  let B = B2;
+  let C = C1 + C2 + C3 + C5d;
+  let D = D2;
+  let E = E2;
+  let F = F2;
+
+  // 热水类型覆盖（供暖/热泵优先）
+  if (pump) {
+    F = F + C1 + C3 + C5d + C2;
+    C = 0;
+  } else if (heating) {
+    D = D + C1 + C3 + C5d + C2;
+    C = 0;
+  }
+
+  // 最终计算
+  let totalWater = A + B + C + D + E + F;
+  let cold = totalWater * factor;
+  let hot = A*coefA + B*coefB + C*coefC + D*coefD + E*coefE + F*coefF;
+  let total = cold + hot + cook;
+
+  // 显示结果
+  document.getElementById("total").innerText = total.toFixed(3);
+}
+</script>
+</body>
+</html>
